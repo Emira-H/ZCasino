@@ -36,16 +36,19 @@ def choice_number():
     print("La numéro sur lequel la bille s'arrête est {}".format(number_roulette))
     return (number_player,number_roulette)
 
-def calculate_gain():
+def calculate_gain(money):
     bet = choice_bet()
     tuple_number=(number_player,number_roulette) = choice_number()
     if tuple_number[0] == tuple_number[1]:
         gain = 3 * bet
+        money = gain + bet
         print(" Bravo c'est le jackpot! Vous avez gagné {}!".format(gain))
     elif (tuple_number[0] % 2 == 0 and tuple_number[1] % 2 == 0) or (tuple_number[0] % 2 != 0 and tuple_number[1] % 2 != 0):
         gain = ceil(0.5 * bet)
+        money = gain + bet
         print("Vous récupérez la moitié de votre mise soit {}$".format(gain))
     else:
         gain = 0
+        money = money - bet
         print("Vous avez perdu votre mise de {}$".format(bet))
-    return gain
+    return money
