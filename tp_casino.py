@@ -1,5 +1,5 @@
 
-from random import randint
+from random import randrange
 
 def choice_bet():
     bet = -1
@@ -18,17 +18,21 @@ def choice_bet():
 choice_bet()
 
 def choice_number():
-    number = -1
-    while number not in range(0,50):
+    number_player = -1
+    while number_player not in range(0,50):
         try:
-            number = input("Veuillez choisir un numéro compris entre 0 et 49: ")
-            number = int(number)
-            print("Vous avez choisi de jouer le numéro {}".format(number))
+            number_player = input("Veuillez choisir un numéro compris entre 0 et 49: ")
+            number_player = int(number_player)
+            print("Vous avez choisi de jouer le numéro {}".format(number_player))
+            print("Le croupier lance la roulette!")
         except ValueError:
             print("Votre saisie n'est pas valide. Vous devez saisir un nombre! ")
-            number = -1
+            number_player = -1
             continue
-        if number not in range(0,50):
+        if number_player not in range(0,50):
             print("Le numéro choisi doit être compris entre 0 et 49")
-    return number
+            return number_player
+    number_roulette = randrange(50)
+    print("La numéro sur lequel la bille s'arrête est {}".format(number_roulette))
+    return number_roulette
 choice_number()
