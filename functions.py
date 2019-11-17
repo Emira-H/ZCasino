@@ -1,11 +1,12 @@
-
 from random import randrange
 from math import ceil
 
 def choice_bet():
-    bet = -1
+    bet = 0
+    money = 10
+
     # demander la mise
-    while bet <= 0:
+    while bet <= 0 or bet > money:
         bet = input("veuillez entrer votre mise: ")
         try:
             bet = int(bet)
@@ -16,6 +17,8 @@ def choice_bet():
             continue
         if bet <= 0:
             print("La mise saisie doit être supérieure à 0")
+        if bet > money:
+            print("La mise ne peut être supérieure à votre réserve d'argent!")
     return bet
 
 def choice_number():
@@ -41,14 +44,14 @@ def calculate_gain(money):
     tuple_number=(number_player,number_roulette) = choice_number()
     if tuple_number[0] == tuple_number[1]:
         gain = 3 * bet
-        money = gain + bet
+        money += money + gain
         print(" Bravo c'est le jackpot! Vous avez gagné {}!".format(gain))
     elif (tuple_number[0] % 2 == 0 and tuple_number[1] % 2 == 0) or (tuple_number[0] % 2 != 0 and tuple_number[1] % 2 != 0):
         gain = ceil(0.5 * bet)
-        money = gain + bet
+        money += gain
         print("Vous récupérez la moitié de votre mise soit {}$".format(gain))
     else:
         gain = 0
-        money = money - bet
+        money -= bet
         print("Vous avez perdu votre mise de {}$".format(bet))
     return money
